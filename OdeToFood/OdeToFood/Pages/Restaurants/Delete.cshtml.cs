@@ -11,18 +11,18 @@ namespace OdeToFood.Pages.Restaurants
 {
     public class DeleteModel : PageModel
     {
-        private readonly IRestaurantData restaurantData;
+        private readonly IRestaurantData _restaurantData;
 
         public Restaurant Restaurant { get; set; }
 
         public DeleteModel(IRestaurantData restaurantData)
         {
-            this.restaurantData = restaurantData;
+            _restaurantData = restaurantData;
         }
 
         public IActionResult OnGet(int restaurantId)
         {
-            Restaurant = restaurantData.GetById(restaurantId);
+            Restaurant = _restaurantData.GetById(restaurantId);
 
             if (Restaurant == null)
             {
@@ -33,8 +33,8 @@ namespace OdeToFood.Pages.Restaurants
 
         public IActionResult OnPost(int restaurantId)
         {
-            var restaurant = restaurantData.Delete(restaurantId);
-            restaurantData.Commit();
+            var restaurant = _restaurantData.Delete(restaurantId);
+            _restaurantData.Commit();
 
             if (restaurant == null)
             {

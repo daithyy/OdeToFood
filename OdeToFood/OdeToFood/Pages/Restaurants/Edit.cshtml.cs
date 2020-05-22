@@ -12,7 +12,7 @@ namespace OdeToFood.Pages.Restaurants
 {
     public class EditModel : PageModel
     {
-        private readonly IRestaurantData restaurantData;
+        private readonly IRestaurantData _restaurantData;
         private readonly IHtmlHelper htmlHelper;
 
         [BindProperty]
@@ -22,7 +22,7 @@ namespace OdeToFood.Pages.Restaurants
         public EditModel(IRestaurantData restaurantData,
                          IHtmlHelper htmlHelper)
         {
-            this.restaurantData = restaurantData;
+            _restaurantData = restaurantData;
             this.htmlHelper = htmlHelper;
         }
 
@@ -31,7 +31,7 @@ namespace OdeToFood.Pages.Restaurants
             Cuisines = htmlHelper.GetEnumSelectList<CuisineType>();
             
             if (restaurantId.HasValue)
-                Restaurant = restaurantData.GetById(restaurantId.Value);
+                Restaurant = _restaurantData.GetById(restaurantId.Value);
             else
                 Restaurant = new Restaurant();
 
@@ -52,11 +52,11 @@ namespace OdeToFood.Pages.Restaurants
             }
 
             if (Restaurant.Id > 0)
-                restaurantData.Update(Restaurant);
+                _restaurantData.Update(Restaurant);
             else
-                restaurantData.Add(Restaurant);
+                _restaurantData.Add(Restaurant);
 
-            restaurantData.Commit();
+            _restaurantData.Commit();
 
             TempData["Message"] = "Restaurant saved!";
 

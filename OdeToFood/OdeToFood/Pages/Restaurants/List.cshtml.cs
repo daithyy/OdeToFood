@@ -13,7 +13,7 @@ namespace OdeToFood.Pages.Restaurants
     public class ListModel : PageModel
     {
         private readonly IConfiguration config;
-        private readonly IRestaurantData restaurantData;
+        private readonly IRestaurantData _restaurantData;
 
         public string Message { get; set; }
         public IEnumerable<Restaurant> Restaurants { get; set; }
@@ -25,13 +25,13 @@ namespace OdeToFood.Pages.Restaurants
                          IRestaurantData restaurantData)
         {
             this.config = config;
-            this.restaurantData = restaurantData;
+            _restaurantData = restaurantData;
         }
 
         public void OnGet()
         {            
             Message = config["Message"];
-            Restaurants = restaurantData.GetRestaurantsByName(SearchTerm);
+            Restaurants = _restaurantData.GetRestaurantsByName(SearchTerm);
         }
     }
 }
