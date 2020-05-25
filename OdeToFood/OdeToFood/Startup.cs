@@ -51,6 +51,8 @@ namespace OdeToFood
 
             app.UseHttpsRedirection();
             app.UseStaticFiles();
+            // Build static files from node_modules folder in root directory
+            app.UseNodeModules(env.ContentRootPath);
 
             app.UseRouting();
 
